@@ -27,6 +27,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        \App\Models\Invoice::observe(\App\Observers\InvoiceObserver::class);
+        \App\Models\Payment::observe(\App\Observers\PaymentObserver::class);
     }
 }
