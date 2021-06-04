@@ -4,7 +4,10 @@
       <!-- sidebar: style can be found in sidebar.less -->
       <nav class="sidebar-nav overflow-hidden">
         <!-- sidebar menu: : style can be found in sidebar.less -->
+        
         <ul class="nav">
+          @include(backpack_view('inc.sidebar_card'))
+
           <!-- <li class="nav-title">{{ trans('backpack::base.administration') }}</li> -->
           <!-- ================================================ -->
           <!-- ==== Recommended place for admin menu items ==== -->
