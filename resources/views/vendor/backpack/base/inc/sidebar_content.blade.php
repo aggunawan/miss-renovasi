@@ -20,3 +20,9 @@
 	<a class="nav-link" href="{{ backpack_url('permission') }}"><i class="nav-icon la la-key"></i> <span>{{ __('Permissions') }}</span></a>
 </li>
 @endif
+
+@if (backpack_user()->can('manage-customers'))
+<li class='nav-item'>
+	<a class='nav-link' href='{{ backpack_url('customer') }}'><i class='nav-icon la la-users'></i> {{ __('Customers') }}</a>
+</li>
+@endif

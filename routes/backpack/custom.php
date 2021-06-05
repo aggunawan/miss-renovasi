@@ -9,4 +9,5 @@ Route::group([
     'namespace'  => 'App\Http\Controllers\Admin',
 ], function () {
     Route::crud('account', 'AccountCrudController');
+    Route::crud('customer', 'CustomerCrudController');
 });

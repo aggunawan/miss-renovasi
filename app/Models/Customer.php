@@ -7,5 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'address',
+        'phone',
+    ];
 }
