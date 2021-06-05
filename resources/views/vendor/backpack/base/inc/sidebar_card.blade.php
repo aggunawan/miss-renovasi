@@ -4,6 +4,11 @@
   </p>
 
   <p class="mb-0">
+    <i class="la la-user nav-icon"></i>
+    <span class="px-2">{{ backpack_auth()->user()->getRoles() }}</span>
+  </p>
+
+  <p class="mb-0">
     <i class="la la-calendar nav-icon"></i>
     <span class="px-2">{{ now()->format('D, j F Y') }}</span>
   </p>

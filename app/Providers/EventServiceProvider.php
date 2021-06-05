@@ -29,5 +29,6 @@ class EventServiceProvider extends ServiceProvider
     {
         \App\Models\Invoice::observe(\App\Observers\InvoiceObserver::class);
         \App\Models\Payment::observe(\App\Observers\PaymentObserver::class);
+        \App\Models\User::observe(\App\Observers\UserObserver::class);
     }
 }
