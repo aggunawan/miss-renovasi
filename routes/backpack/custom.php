@@ -10,4 +10,5 @@ Route::group([
 ], function () {
     Route::crud('account', 'AccountCrudController');
     Route::crud('customer', 'CustomerCrudController');
+    Route::crud('bank', 'BankCrudController');
 });

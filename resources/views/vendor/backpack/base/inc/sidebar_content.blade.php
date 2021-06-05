@@ -26,3 +26,9 @@
 	<a class='nav-link' href='{{ backpack_url('customer') }}'><i class='nav-icon la la-users'></i> {{ __('Customers') }}</a>
 </li>
 @endif
+
+@if (backpack_user()->can('manage-bank-accounts'))
+<li class='nav-item'>
+	<a class='nav-link' href='{{ backpack_url('bank') }}'><i class='nav-icon la la-id-card'></i> {{ __('Bank Accounts') }}</a>
+</li>
+@endif
