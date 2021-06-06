@@ -68,7 +68,12 @@ class InvoiceCrudController extends CrudController
             'type'  => 'date',
             'format' => 'D MMMM G'
         ]);
-        $this->crud->addColumn(['name' => 'status', 'label' => __('Status')]);
+        $this->crud->addColumn([
+            'name' => 'status',
+            'label' => __('Status'),
+            'type' => 'model_function',
+            'function_name' => 'getDescriptiveStatus',
+        ]);
     }
 
     protected function setupCreateOperation()
@@ -199,7 +204,7 @@ class InvoiceCrudController extends CrudController
             'model'     => 'App\Models\BankAccount',
         ]);
 
-        $this->crud->addColumn(['name' => 'status', 'type' => 'text']);
+        $this->crud->addColumn(['name' => 'latest_status', 'type' => 'text']);
 
         $this->crud->addColumn([
             'name'  => 'contents', 

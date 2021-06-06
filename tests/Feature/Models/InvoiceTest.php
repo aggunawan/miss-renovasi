@@ -94,4 +94,29 @@ class InvoiceTest extends TestCase
 
         $this->assertEquals($invoice->status, InvoiceStatus::Created);
     }
+
+    public function test_invoice_latest_status_is_nullable()
+    {
+        $invoice = Invoice::factory()->create([
+            'customer_id' => Customer::factory()->create()->id,
+            'user_id' => User::factory()->create()->id,
+            'bank_account_id' => BankAccount::factory()->create(),
+        ]);
+
+        $this->assertDatabaseHas('invoices', ['id' => $invoice->id]);
+    }
+
+    public function test_newly_created_invoice_has_single_invoice_history()
+    {
+        $invoice = Invoice::factory()->create([
+            'customer_id' => Customer::factory()->create()->id,
+            'user_id' => User::factory()->create()->id,
+            'bank_account_id' => BankAccount::factory()->create(),
+        ]);
+
+        $invoice->refresh();
+
+        $this->assertNotEquals($invoice->latest_status, null);
+        $this->assertDatabaseHas('invoice_histories', ['invoice_id' => $invoice->id]);
+    }
 }
