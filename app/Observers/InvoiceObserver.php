@@ -27,9 +27,14 @@ class InvoiceObserver
         //
     }
 
+    public function deleting(Invoice $invoice)
+    {
+        $invoice->histories()->delete();
+    }
+
     public function deleted(Invoice $invoice)
     {
-        //
+        // 
     }
 
     public function restored(Invoice $invoice)
