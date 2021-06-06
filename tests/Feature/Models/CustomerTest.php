@@ -20,6 +20,6 @@ class CustomerTest extends TestCase
 
     public function test_customer_phone_is_nullable()
     {
-        $this->assertEquals(null, Customer::factory()->create(['phone' => null])->phone);
+        $this->assertEquals('Unset', Customer::factory()->create(['phone' => null])->phone);
     }
 }

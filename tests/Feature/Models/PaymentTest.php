@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Models;
 
+use App\Models\BankAccount;
 use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\Payment;
@@ -21,6 +22,8 @@ class PaymentTest extends TestCase
                 'user_id' => User::factory()->create(),
                 'invoice_id' => Invoice::factory()->create([
                     'customer_id' => Customer::factory()->create(),
+                    'user_id' => User::factory()->create(),
+                    'bank_account_id' => BankAccount::factory()->create(),
                 ]),
             ])->id
         ]);
@@ -35,6 +38,8 @@ class PaymentTest extends TestCase
                     'user_id' => User::factory()->create(),
                     'invoice_id' => Invoice::factory()->create([
                         'customer_id' => Customer::factory()->create(),
+                        'user_id' => User::factory()->create(),
+                        'bank_account_id' => BankAccount::factory()->create(),
                     ]),
                 ])->confirmed_at
             )
@@ -49,6 +54,8 @@ class PaymentTest extends TestCase
                 'user_id' => User::factory()->create(),
                 'invoice_id' => Invoice::factory()->create([
                     'customer_id' => Customer::factory()->create(),
+                    'user_id' => User::factory()->create(),
+                    'bank_account_id' => BankAccount::factory()->create(),
                 ]),
             ])->id
         ]);
@@ -61,6 +68,8 @@ class PaymentTest extends TestCase
             'confirmed_at' => null,
             'invoice_id' => Invoice::factory()->create([
                 'customer_id' => Customer::factory()->create(),
+                'user_id' => User::factory()->create(),
+                'bank_account_id' => BankAccount::factory()->create(),
             ]),
         ])->confirmed_at);
     }

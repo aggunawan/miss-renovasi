@@ -44,5 +44,15 @@ class RolesTableSeeder extends Seeder
             ['name' => 'manage-customers'],
             ['name' => 'manage-customers', 'guard_name' => 'web'],
         );
+
+        Permission::firstOrCreate(
+            ['name' => 'manage-bank-accounts'],
+            ['name' => 'manage-bank-accounts', 'guard_name' => 'web'],
+        );
+
+        Permission::firstOrCreate(
+            ['name' => 'manage-invoices'],
+            ['name' => 'manage-invoices', 'guard_name' => 'web'],
+        );
     }
 }

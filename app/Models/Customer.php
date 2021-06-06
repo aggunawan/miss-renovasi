@@ -15,4 +15,9 @@ class Customer extends Model
         'address',
         'phone',
     ];
+
+    public function getPhoneAttribute($value)
+    {
+        return $value ?? 'Unset';
+    }
 }

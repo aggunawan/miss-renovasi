@@ -2,9 +2,12 @@
 
 namespace Tests\Feature\Models;
 
+use App\Enums\InvoiceStatus;
 use App\Exceptions\InvoiceDueLowerThanDate;
+use App\Models\BankAccount;
 use App\Models\Customer;
 use App\Models\Invoice;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -16,7 +19,9 @@ class InvoiceTest extends TestCase
     public function test_creating_invoice_object()
     {
         $invoice = Invoice::factory()->create([
-            'customer_id' => Customer::factory()->create()->id
+            'customer_id' => Customer::factory()->create()->id,
+            'user_id' => User::factory()->create()->id,
+            'bank_account_id' => BankAccount::factory()->create(),
         ]);
 
         $this->assertDatabaseHas('invoices', ['id' => $invoice->id]);
@@ -26,7 +31,9 @@ class InvoiceTest extends TestCase
     {
         $invoice = Invoice::factory()->create([
             'contents' => null,
-            'customer_id' => Customer::factory()->create()->id
+            'customer_id' => Customer::factory()->create()->id,
+            'user_id' => User::factory()->create()->id,
+            'bank_account_id' => BankAccount::factory()->create(),
         ]);
 
         $this->assertEquals($invoice->contents, null);
@@ -35,7 +42,9 @@ class InvoiceTest extends TestCase
     public function test_content_is_array()
     {
         $invoice = Invoice::factory()->create([
-            'customer_id' => Customer::factory()->create()->id
+            'customer_id' => Customer::factory()->create()->id,
+            'user_id' => User::factory()->create()->id,
+            'bank_account_id' => BankAccount::factory()->create(),
         ]);
 
         $this->assertEquals($invoice->contents, []);
@@ -44,7 +53,9 @@ class InvoiceTest extends TestCase
     public function test_date_is_carbon()
     {
         $invoice = Invoice::factory()->create([
-            'customer_id' => Customer::factory()->create()->id
+            'customer_id' => Customer::factory()->create()->id,
+            'user_id' => User::factory()->create()->id,
+            'bank_account_id' => BankAccount::factory()->create(),
         ]);
 
         $this->assertEquals(get_class($invoice->date), 'Illuminate\Support\Carbon');
@@ -53,7 +64,9 @@ class InvoiceTest extends TestCase
     public function test_due_is_carbon()
     {
         $invoice = Invoice::factory()->create([
-            'customer_id' => Customer::factory()->create()->id
+            'customer_id' => Customer::factory()->create()->id,
+            'user_id' => User::factory()->create()->id,
+            'bank_account_id' => BankAccount::factory()->create(),
         ]);
 
         $this->assertEquals(get_class($invoice->due), 'Illuminate\Support\Carbon');
@@ -66,6 +79,19 @@ class InvoiceTest extends TestCase
         $invoice = Invoice::factory()->create([
             'due' => now()->subDay(),
             'customer_id' => Customer::factory()->create()->id,
+            'user_id' => User::factory()->create()->id,
+            'bank_account_id' => BankAccount::factory()->create(),
         ]);
+    }
+
+    public function test_default_invoice_status_is_created()
+    {
+        $invoice = Invoice::factory()->create([
+            'customer_id' => Customer::factory()->create()->id,
+            'user_id' => User::factory()->create()->id,
+            'bank_account_id' => BankAccount::factory()->create(),
+        ]);
+
+        $this->assertEquals($invoice->status, InvoiceStatus::Created);
     }
 }

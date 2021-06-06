@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Enums\InvoiceStatus;
 use App\Models\Invoice;
 use App\Exceptions\InvoiceDueLowerThanDate;
 
@@ -10,6 +11,9 @@ class InvoiceObserver
     public function creating(Invoice $invoice)
     {
         if ($invoice->due->lt($invoice->date)) throw new InvoiceDueLowerThanDate("unable to save invoice with due lower than date", 1);
+        
+        $invoice->status = InvoiceStatus::Created;
+        $invoice->user_id = backpack_auth()->user()?->id;
     }
 
     public function created(Invoice $invoice)
