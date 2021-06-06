@@ -19,7 +19,8 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         'App\Events\InvoiceCreated' => [
-            'App\Listeners\PostCreatedInvoice'
+            'App\Listeners\PostCreatedInvoice',
+            'App\Listeners\ScheduleInvoice',
         ],
     ];
 

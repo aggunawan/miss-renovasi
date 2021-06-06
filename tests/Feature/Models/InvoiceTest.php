@@ -92,7 +92,7 @@ class InvoiceTest extends TestCase
             'bank_account_id' => BankAccount::factory()->create(),
         ]);
 
-        $this->assertEquals($invoice->status, InvoiceStatus::Created);
+        $this->assertEquals($invoice->status, InvoiceStatus::Scheduled);
     }
 
     public function test_invoice_latest_status_is_nullable()
@@ -118,5 +118,66 @@ class InvoiceTest extends TestCase
 
         $this->assertNotEquals($invoice->latest_status, null);
         $this->assertDatabaseHas('invoice_histories', ['invoice_id' => $invoice->id]);
+    }
+
+    public function test_invoice_with_two_days_gap_or_more()
+    {
+        $invoice = Invoice::factory()->create([
+            'customer_id' => Customer::factory()->create()->id,
+            'user_id' => User::factory()->create()->id,
+            'bank_account_id' => BankAccount::factory()->create(),
+            'date' => '2021-01-01',
+            'due' => '2021-01-03',
+            'created_at' => '2021-01-01 12:01:23'
+        ]);
+
+        $invoice->refresh();
+
+        $this->assertEquals($invoice->scheduled_at, '2021-01-02 12:01:23');
+    }
+
+    public function test_invoice_with_tommorrow_due()
+    {
+        $invoice = Invoice::factory()->create([
+            'customer_id' => Customer::factory()->create()->id,
+            'user_id' => User::factory()->create()->id,
+            'bank_account_id' => BankAccount::factory()->create(),
+            'date' => '2021-01-01',
+            'due' => '2021-01-02',
+            'created_at' => '2021-01-01 12:01:23'
+        ]);
+
+        $invoice->refresh();
+
+        $this->assertEquals($invoice->scheduled_at, '2021-01-01 12:16:23');
+    }
+
+    public function test_invoice_due_in_same_date()
+    {
+        $invoice = Invoice::factory()->create([
+            'customer_id' => Customer::factory()->create()->id,
+            'user_id' => User::factory()->create()->id,
+            'bank_account_id' => BankAccount::factory()->create(),
+            'date' => '2021-01-01',
+            'due' => '2021-01-01',
+            'created_at' => '2021-01-01 12:00:45'
+        ]);
+
+        $invoice->refresh();
+
+        $this->assertEquals($invoice->scheduled_at, '2021-01-01 12:15:45');
+    }
+
+    public function test_invoice_status_is_scheduled_after_scheduling()
+    {
+        $invoice = Invoice::factory()->create([
+            'customer_id' => Customer::factory()->create()->id,
+            'user_id' => User::factory()->create()->id,
+            'bank_account_id' => BankAccount::factory()->create(),
+        ]);
+
+        $invoice->refresh();
+
+        $this->assertEquals($invoice->status, InvoiceStatus::Scheduled);
     }
 }

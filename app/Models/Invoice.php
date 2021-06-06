@@ -34,11 +34,24 @@ class Invoice extends Model
             case InvoiceStatus::Created:
                 return 'Dibuat';
                 break;
+
+            case InvoiceStatus::Scheduled:
+                return 'Terjadwalkan';
+                break;
             
             default:
                 return 'Tidak Diketahui';
                 break;
         }
+    }
+
+    public function getOptimizeScheuleTimestamp()
+    {
+        $diff = $this->date->diffInDays($this->due);
+
+        if ($diff >= 2) return "{$this->due->subDay()->toDateString()} {$this->created_at->format('H:i:s')}";
+        
+        return $this->created_at->addMinutes(15)->toDateTimeString();
     }
 
     public function customer()
