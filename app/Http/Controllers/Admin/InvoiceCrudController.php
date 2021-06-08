@@ -74,6 +74,7 @@ class InvoiceCrudController extends CrudController
             'type' => 'model_function',
             'function_name' => 'getDescriptiveStatus',
         ]);
+        $this->crud->addButtonFromView('line', 'invoice', 'invoice', 'beginning');
     }
 
     protected function setupCreateOperation()
@@ -216,8 +217,8 @@ class InvoiceCrudController extends CrudController
             ]
         ]);
 
-        // $this->crud->addColumn(['cusstomer' => 'customer.name', 'label' => __('Customer')]);
-        // $this->crud->addColumn(['cusstomer' => 'customer.phone', 'label' => __('Phone')]);
-        // $this->crud->addColumn(['cusstomer' => 'customer.address', 'label' => __('Address')]);
+        $this->crud->addButtonFromView('line', 'invoice', 'invoice', 'beginning');
+
+        $this->crud->addColumn(['name' => 'latest_status', 'type' => 'text']);
     }
 }

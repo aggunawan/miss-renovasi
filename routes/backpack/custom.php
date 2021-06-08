@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\StatementController;
+
 Route::group([
     'prefix'     => config('backpack.base.route_prefix', 'admin'),
     'middleware' => array_merge(
@@ -8,6 +10,7 @@ Route::group([
     ),
     'namespace'  => 'App\Http\Controllers\Admin',
 ], function () {
+    Route::get('statements/{statement}', [StatementController::class, 'show'])->name('statements.show');
     Route::crud('account', 'AccountCrudController');
     Route::crud('customer', 'CustomerCrudController');
     Route::crud('bank', 'BankCrudController');
