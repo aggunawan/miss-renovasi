@@ -24,6 +24,7 @@ class CustomerCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column('name');
+        CRUD::column('email');
         CRUD::column('phone');
     }
 
@@ -32,6 +33,7 @@ class CustomerCrudController extends CrudController
         CRUD::setValidation(CustomerRequest::class);
 
         CRUD::field('name');
+        CRUD::field('email');
         CRUD::field('address');
         CRUD::field('phone');
     }

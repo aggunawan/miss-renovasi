@@ -28,6 +28,7 @@ class CustomerRequest extends FormRequest
         return [
             'name' => 'required|min:5|max:255',
             'address' => 'required|min:5|max:255',
+            'email' => 'required|min:5|max:255|unique:customers,email',
             'phone' => ['nullable', 'numeric', 'regex:/\+?([ -]?\d+)+|\(\d+\)([ -]\d+)/'],
         ];
     }

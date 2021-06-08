@@ -14,6 +14,7 @@ class Customer extends Model
         'name',
         'address',
         'phone',
+        'email',
     ];
 
     public function getPhoneAttribute($value)

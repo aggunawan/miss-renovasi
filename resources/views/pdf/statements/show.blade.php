@@ -99,7 +99,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td style="text-align: right;">{{ backpack_auth()->user()->name . ' (Admin)' }}</td>
+			<td style="text-align: right;">{{ $invoice->user->name . ' (Admin)' }}</td>
 		</tr>
 	</table>
  </body>

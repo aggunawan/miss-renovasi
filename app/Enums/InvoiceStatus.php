@@ -8,4 +8,5 @@ final class InvoiceStatus extends Enum
 {
     const Created = 1;
     const Scheduled = 2;
+    const Sended = 3;
 }

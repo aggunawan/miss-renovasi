@@ -12,7 +12,7 @@ class StatementController extends Controller
     {
         return PDF::loadView(
             'pdf.statements.show',
-            ['invoice' => $statement->load(['customer', 'bankAccount'])]
+            ['invoice' => $statement->load(['customer', 'bankAccount', 'user'])]
         )->stream($this->getStatementName($statement));
     }
 
