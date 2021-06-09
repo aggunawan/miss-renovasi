@@ -73,4 +73,9 @@ class Invoice extends Model
     {
         return $this->hasMany(InvoiceHistory::class);
     }
+
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
+    }
 }

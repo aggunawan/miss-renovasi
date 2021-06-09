@@ -21,6 +21,7 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\InvoiceCreated' => [
             'App\Listeners\PostCreatedInvoice',
             'App\Listeners\ScheduleInvoice',
+            'App\Listeners\CreatePayment',
         ],
     ];
 

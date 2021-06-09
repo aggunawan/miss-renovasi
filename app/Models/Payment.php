@@ -12,4 +12,8 @@ class Payment extends Model
     protected $casts = [
         'confirmed_at' => 'datetime'
     ];
+
+    protected $fillable = [
+        'user_id',
+    ];
 }
