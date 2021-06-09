@@ -218,6 +218,7 @@ class InvoiceCrudController extends CrudController
         ]);
 
         $this->crud->addButtonFromView('line', 'invoice', 'invoice', 'beginning');
+        $this->crud->addButtonFromView('line', 'send-alert', 'send-alert', 'beginning');
 
         $this->crud->addColumn(['name' => 'latest_status', 'type' => 'text']);
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NotifyStatementController;
 use App\Http\Controllers\StatementController;
 
 Route::group([
@@ -10,6 +11,7 @@ Route::group([
     ),
     'namespace'  => 'App\Http\Controllers\Admin',
 ], function () {
+    Route::post('notify/{statement}', [NotifyStatementController::class, 'store'])->name('notify.store');
     Route::get('statements/{statement}', [StatementController::class, 'show'])->name('statements.show');
     Route::crud('account', 'AccountCrudController');
     Route::crud('customer', 'CustomerCrudController');
