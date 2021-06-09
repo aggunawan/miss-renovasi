@@ -17,4 +17,5 @@ Route::group([
     Route::crud('customer', 'CustomerCrudController');
     Route::crud('bank', 'BankCrudController');
     Route::crud('invoice', 'InvoiceCrudController');
+    Route::crud('payment', 'PaymentCrudController');
 });
