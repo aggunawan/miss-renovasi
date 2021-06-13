@@ -3,6 +3,7 @@
 use App\Http\Controllers\NotifyStatementController;
 use App\Http\Controllers\PaymentApproveController;
 use App\Http\Controllers\PaymentDeclineController;
+use App\Http\Controllers\PaymentReceiptController;
 use App\Http\Controllers\StatementController;
 
 Route::group([
@@ -23,4 +24,5 @@ Route::group([
     Route::crud('invoice', 'InvoiceCrudController');
     Route::crud('payment', 'PaymentCrudController');
     Route::crud('receipt', 'ReceiptCrudController');
+    Route::get('payment-receipt/{paymentReceipt}', [PaymentReceiptController::class, 'show'])->name('payment-receipt.show');
 });

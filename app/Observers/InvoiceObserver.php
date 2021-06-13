@@ -30,6 +30,8 @@ class InvoiceObserver
     public function deleting(Invoice $invoice)
     {
         $invoice->histories()->delete();
+        $invoice->payment->receipt()->delete();
+        $invoice->payment()->delete();
     }
 
     public function deleted(Invoice $invoice)

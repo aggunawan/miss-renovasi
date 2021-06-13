@@ -42,6 +42,5 @@ class SendInvoiceAlert implements ShouldQueue
         $this->invoice->status = InvoiceStatus::Sended;
         $this->invoice->latest_status = $message;
         $this->invoice->save();
-
     }
 }

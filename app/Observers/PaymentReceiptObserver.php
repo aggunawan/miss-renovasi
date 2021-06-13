@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Events\PaymentReceiptCreated;
 use App\Models\Invoice;
 use App\Models\PaymentReceipt;
 use NumberFormatter;
@@ -25,7 +26,7 @@ class PaymentReceiptObserver
 
     public function created(PaymentReceipt $paymentReceipt)
     {
-        //
+        event(new PaymentReceiptCreated($paymentReceipt));
     }
 
     public function updated(PaymentReceipt $paymentReceipt)

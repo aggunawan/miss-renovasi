@@ -54,6 +54,8 @@ class ReceiptCrudController extends CrudController
                'label' => __('Amount'),
             ],
         ]);
+        
+        $this->crud->addButtonFromView('line', 'receipt', 'receipt', 'beginning');
     }
 
     protected function setupCreateOperation()

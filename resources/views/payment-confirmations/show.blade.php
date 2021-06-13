@@ -44,6 +44,11 @@
                             </div>
                         @endif
 
+                        @if ($payment->isReceiptDownloadable())
+                            <a class="btn btn-success btn-block" href="{{ route('payment-receipt.show', $payment->receipt) }}">
+                                {{ __('Unduh Kwitansi Pembayaran') }}
+                            </a>
+                        @endif
                     </form>
                 </div>
             </div>

@@ -38,6 +38,10 @@ class Invoice extends Model
             case InvoiceStatus::Scheduled:
                 return 'Terjadwalkan';
                 break;
+
+            case InvoiceStatus::Sended:
+                return 'Terkirim';
+                break;
             
             default:
                 return 'Tidak Diketahui';

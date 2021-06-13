@@ -52,4 +52,16 @@ class Payment extends Model
     {
         return collect([PaymentStatus::Pay])->contains($this->status);
     }
+
+    public function isReceiptDownloadable()
+    {
+        $approved = collect([PaymentStatus::Approved])->contains($this->status);
+
+        return $approved and $this->receipt()->exists();
+    }
+
+    public function receipt()
+    {
+        return $this->hasOne(PaymentReceipt::class);
+    }
 }

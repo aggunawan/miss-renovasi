@@ -23,6 +23,9 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\ScheduleInvoice',
             'App\Listeners\CreatePayment',
         ],
+        'App\Events\PaymentReceiptCreated' => [
+            'App\Listeners\SendReceipt',
+        ],
     ];
 
     /**
