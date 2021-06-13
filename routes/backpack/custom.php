@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\NotifyStatementController;
+use App\Http\Controllers\PaymentApproveController;
+use App\Http\Controllers\PaymentDeclineController;
 use App\Http\Controllers\StatementController;
 
 Route::group([
@@ -11,6 +13,8 @@ Route::group([
     ),
     'namespace'  => 'App\Http\Controllers\Admin',
 ], function () {
+    Route::post('payment/{payment}/approve', [PaymentApproveController::class, 'store'])->name('payment-approve.store');
+    Route::post('payment/{payment}/decline', [PaymentDeclineController::class, 'store'])->name('payment-decline.store');
     Route::post('notify/{statement}', [NotifyStatementController::class, 'store'])->name('notify.store');
     Route::get('statements/{statement}', [StatementController::class, 'show'])->name('statements.show');
     Route::crud('account', 'AccountCrudController');

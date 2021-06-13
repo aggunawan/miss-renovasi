@@ -69,5 +69,9 @@ class PaymentCrudController extends CrudController
                 'function_name' => 'getStatus',
             ],
         ]);
+
+        $this->crud->addButtonFromView('line', 'approve', 'approve-proof', 'beginning');
+        $this->crud->addButtonFromView('line', 'decline', 'decline-proof', 'beginning');
+        $this->crud->addButtonFromView('line', 'proof', 'proof', 'beginning');
     }
 }

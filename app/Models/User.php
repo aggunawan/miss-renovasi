@@ -35,11 +35,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = bcrypt($value);
-    }
-
     protected function getRolesArray()
     {
         return $this->roles()->pluck('name');

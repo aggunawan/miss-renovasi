@@ -83,4 +83,9 @@ class AccountCrudController extends UserCrudController
             ],
         ]);
     }
+
+    public function update()
+    {
+        return parent::update();
+    }
 }
