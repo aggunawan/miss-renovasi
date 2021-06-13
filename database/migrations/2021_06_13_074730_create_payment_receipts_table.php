@@ -20,6 +20,7 @@ class CreatePaymentReceiptsTable extends Migration
             $table->string('counted');
             $table->string('note');
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('payment_id')->constrained();
             $table->timestamps();
         });
     }

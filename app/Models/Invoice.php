@@ -78,4 +78,9 @@ class Invoice extends Model
     {
         return $this->hasOne(Payment::class);
     }
+
+    public function getSubTotal()
+    {
+        return collect($this->contents)->sum('price');
+    }
 }

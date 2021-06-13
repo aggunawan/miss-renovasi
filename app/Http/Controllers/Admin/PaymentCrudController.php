@@ -26,7 +26,7 @@ class PaymentCrudController extends CrudController
         CRUD::setRoute(config('backpack.base.route_prefix') . '/payment');
         CRUD::setEntityNameStrings('payment', 'payments');
 
-        $this->crud->denyAccess(['create', 'update', 'create', 'delete']);
+        $this->crud->denyAccess(['create', 'update', 'edit', 'delete']);
     }
 
     protected function setupListOperation()

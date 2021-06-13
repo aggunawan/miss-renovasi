@@ -54,5 +54,10 @@ class RolesTableSeeder extends Seeder
             ['name' => 'manage-invoices'],
             ['name' => 'manage-invoices', 'guard_name' => 'web'],
         );
+
+        Permission::firstOrCreate(
+            ['name' => 'manage-receipts'],
+            ['name' => 'manage-receipts', 'guard_name' => 'web'],
+        );
     }
 }

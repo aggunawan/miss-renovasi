@@ -43,3 +43,9 @@
 	<a class='nav-link' href='{{ backpack_url('payment') }}'><i class='nav-icon la la-wallet'></i> {{ __('Payments') }}</a>
 </li>
 @endif
+
+@if (backpack_user()->can('manage-receipts'))
+<li class='nav-item'>
+	<a class='nav-link' href='{{ backpack_url('receipt') }}'><i class='nav-icon la la-receipt'></i> {{ __('Receipts') }}</a>
+</li>
+@endif
