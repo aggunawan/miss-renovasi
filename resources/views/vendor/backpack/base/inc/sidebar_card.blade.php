@@ -9,8 +9,13 @@
   </p>
 
   <p class="mb-0">
+    <i class="la la-hourglass nav-icon"></i>
+    <span class="px-2">{{ now()->format('l') }}</span>
+  </p>
+
+  <p class="mb-0">
     <i class="la la-calendar nav-icon"></i>
-    <span class="px-2">{{ now()->format('D, j F Y') }}</span>
+    <span class="px-2">{{ now()->format('j F Y') }}</span>
   </p>
 
   <p>

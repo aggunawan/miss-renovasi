@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\PaymentStatus;
+use App\Events\PaymentVerificationRequested;
 use App\Http\Requests\PaymentConfirmationUpdateRequest;
 use App\Models\Payment;
 use Illuminate\Http\Request;
@@ -23,6 +24,8 @@ class PaymentConfirmationController extends Controller
         $payment->proof = $this->cloudinaryUpload($request, 'payment.proof');
         $payment->status = PaymentStatus::Pay;
         $payment->save();
+
+        event(new PaymentVerificationRequested($payment));
 
         return redirect()->back();
     }

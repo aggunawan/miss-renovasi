@@ -5,7 +5,6 @@ namespace App\Jobs;
 use App\Enums\InvoiceStatus;
 use App\Mail\InvoiceAlert;
 use App\Models\Invoice;
-use App\Models\InvoiceHistory;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -35,9 +34,9 @@ class SendInvoiceAlert implements ShouldQueue
         $date = now()->toDateTimeString();
         $message = "Invoice {$this->invoice->number} alert sended at {$date}";
 
-        $this->invoice->histories(new InvoiceHistory([
+        $this->invoice->histories()->create([
             'message' => $message
-        ]));
+        ]);
 
         $this->invoice->status = InvoiceStatus::Sended;
         $this->invoice->latest_status = $message;

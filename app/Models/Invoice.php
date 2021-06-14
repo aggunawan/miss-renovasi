@@ -12,6 +12,9 @@ class Invoice extends Model
     use CrudTrait;
     use HasFactory;
 
+    protected $appends = [
+    ];
+
     protected $fillable = [
         'number',
         'contract_number',
@@ -86,5 +89,10 @@ class Invoice extends Model
     public function getSubTotal()
     {
         return collect($this->contents)->sum('price');
+    }
+
+    public function getHistoriesAttribute()
+    {
+        return $this->histories()->get('message')->toArray();
     }
 }

@@ -36,9 +36,11 @@
 <li class='nav-item'>
 	<a class='nav-link' href='{{ backpack_url('invoice') }}'><i class='nav-icon la la-file-invoice-dollar'></i> {{ __('Invoices') }}</a>
 </li>
-@endif
 
-@if (backpack_user()->can('manage-invoices'))
+<li class='nav-item'>
+	<a class='nav-link' href='{{ backpack_url('invoice-history') }}'><i class='nav-icon la la-history'></i> {{ __('History') }}</a>
+</li>
+
 <li class='nav-item'>
 	<a class='nav-link' href='{{ backpack_url('payment') }}'><i class='nav-icon la la-wallet'></i> {{ __('Payments') }}</a>
 </li>

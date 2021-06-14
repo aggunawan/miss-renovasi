@@ -60,20 +60,23 @@ class InvoiceCrudController extends CrudController
 
     protected function setupListOperation()
     {
-        $this->crud->addColumn(['name' => 'number', 'label' => __('No')]);
-        $this->crud->addColumn(['name' => 'contract_number', 'label' => __('Contract')]);
-        $this->crud->addColumn([
-            'name' => 'due',
-            'label' => __('Due'),
-            'type'  => 'date',
-            'format' => 'D MMMM G'
+        $this->crud->addColumns([
+            ['name' => 'number', 'label' => __('No')],
+            ['name' => 'contract_number', 'label' => __('Contract')],
+            [
+                'name' => 'due',
+                'label' => __('Due'),
+                'type'  => 'date',
+                'format' => 'D MMMM G'
+            ],
+            [
+                'name' => 'status',
+                'label' => __('Status'),
+                'type' => 'model_function',
+                'function_name' => 'getDescriptiveStatus',
+            ]
         ]);
-        $this->crud->addColumn([
-            'name' => 'status',
-            'label' => __('Status'),
-            'type' => 'model_function',
-            'function_name' => 'getDescriptiveStatus',
-        ]);
+
         $this->crud->addButtonFromView('line', 'invoice', 'invoice', 'beginning');
     }
 
@@ -214,6 +217,15 @@ class InvoiceCrudController extends CrudController
             'columns' => [
                 'name' => 'Name',
                 'price' => 'Price'
+            ]
+        ]);
+
+        $this->crud->addColumn([
+            'name'  => 'histories', 
+            'label' => __('History'), 
+            'type'  => 'table', 
+            'columns' => [
+                'message' => 'Event',
             ]
         ]);
 

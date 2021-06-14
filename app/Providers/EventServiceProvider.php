@@ -26,6 +26,15 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\PaymentReceiptCreated' => [
             'App\Listeners\SendReceipt',
         ],
+        'App\Events\PaymentVerificationRequested' => [
+            'App\Listeners\LogPaymentVerification',
+        ],
+        'App\Events\PaymentVerificationDeclined' => [
+            'App\Listeners\LogPaymentDecline',
+        ],
+        'App\Events\PaymentVerificationApproved' => [
+            'App\Listeners\LogPaymentApprove',
+        ],
     ];
 
     /**
