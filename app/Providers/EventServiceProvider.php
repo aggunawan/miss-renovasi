@@ -34,6 +34,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\PaymentVerificationApproved' => [
             'App\Listeners\LogPaymentApprove',
+            'App\Listeners\SetInvoiceToPaid',
         ],
     ];
 

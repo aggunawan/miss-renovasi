@@ -45,6 +45,10 @@ class Invoice extends Model
             case InvoiceStatus::Sended:
                 return 'Terkirim';
                 break;
+
+            case InvoiceStatus::Paid:
+                return 'Telah Dibayar';
+                break;
             
             default:
                 return 'Tidak Diketahui';
