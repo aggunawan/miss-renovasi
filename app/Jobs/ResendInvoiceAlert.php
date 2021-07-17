@@ -9,7 +9,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class SendInvoiceAlert implements ShouldQueue
+class ResendInvoiceAlert implements ShouldQueue
 {
     use Dispatchable;
     use InteractsWithQueue;
@@ -22,5 +22,16 @@ class SendInvoiceAlert implements ShouldQueue
     public function __construct(Invoice $invoice)
     {
         $this->invoice = $invoice;
+    }
+
+    public function getTemplate()
+    {
+        return 'emails.invoices.resend-alert';
+    }
+
+    public function getMessage()
+    {
+        $date = now()->toDateTimeString();
+        return "Invoice {$this->invoice->number} alert resended at {$date}";
     }
 }

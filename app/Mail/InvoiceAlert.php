@@ -14,18 +14,20 @@ class InvoiceAlert extends Mailable
 
     protected $invoice;
     protected $pdf;
+    protected $template;
 
-    public function __construct(Invoice $invoice, $pdf)
+    public function __construct(Invoice $invoice, $pdf, string $template = null)
     {
         $this->invoice = $invoice;
         $this->invoice->load(['payment']);
         $this->pdf = $pdf;
+        $this->template = $template ?? 'emails.invoices.alert';
     }
 
     public function build()
     {
         return $this
-            ->markdown('emails.invoices.alert', [
+            ->markdown($this->template, [
                 'invoice' => $this->invoice,
             ])
             ->attachData($this->pdf, "{$this->invoice->number}.pdf", [

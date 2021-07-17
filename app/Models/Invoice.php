@@ -29,6 +29,7 @@ class Invoice extends Model
         'contents' => 'array',
         'date' => 'datetime',
         'due' => 'datetime',
+        'scheduled_at' => 'datetime',
     ];
 
     public function getDescriptiveStatus()
@@ -48,6 +49,10 @@ class Invoice extends Model
 
             case InvoiceStatus::Paid:
                 return 'Telah Dibayar';
+                break;
+
+            case InvoiceStatus::Resended:
+                return 'Pengiriman Ulang';
                 break;
             
             default:
@@ -98,5 +103,20 @@ class Invoice extends Model
     public function getHistoriesAttribute()
     {
         return $this->histories()->get('message')->toArray();
+    }
+
+    public function reschedule()
+    {
+        $date = $this->scheduled_at->addDay();
+        $message = "Invoice {$this->number} alert will be re-sent at {$date->toDateTimeString()}";
+
+        $this->status = InvoiceStatus::Resended;
+        $this->scheduled_at = $date;
+        $this->latest_status = $message;
+        $this->save();
+
+        $this->histories()->create([
+            'message' => $message
+        ]);
     }
 }

@@ -180,4 +180,26 @@ class InvoiceTest extends TestCase
 
         $this->assertEquals($invoice->status, InvoiceStatus::Scheduled);
     }
+
+    public function test_reschedule_invoice()
+    {
+        $invoice = Invoice::factory()->create([
+            'customer_id' => Customer::factory()->create()->id,
+            'user_id' => User::factory()->create()->id,
+            'bank_account_id' => BankAccount::factory()->create(),
+        ]);
+
+        $lastDate = $invoice->scheduled_at;
+
+        $invoice->reschedule();
+        $invoice->refresh();
+
+        $this->assertEquals($invoice->status, InvoiceStatus::Resended);
+        $this->assertEquals($invoice->scheduled_at->format('d'), $lastDate->format('d') + 1);
+        $this->assertEquals($invoice->scheduled_at->format('m-Y'), $lastDate->format('m-Y'));
+        $this->assertEquals(
+            collect($invoice->histories)->last()['message'],
+            "Invoice {$invoice->number} alert will be re-sent at {$invoice->scheduled_at->toDateTimeString()}"
+        );
+    }
 }
