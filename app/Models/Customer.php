@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Customer extends Model
 {
@@ -20,5 +21,10 @@ class Customer extends Model
     public function getPhoneAttribute($value)
     {
         return $value ?? 'Unset';
+    }
+
+    public function invoices() : HasMany
+    {
+        return $this->hasMany(Invoice::class);
     }
 }
