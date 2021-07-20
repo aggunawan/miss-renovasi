@@ -26,4 +26,5 @@ Route::group([
     Route::crud('receipt', 'ReceiptCrudController');
     Route::get('payment-receipt/{paymentReceipt}', [PaymentReceiptController::class, 'show'])->name('payment-receipt.show');
     Route::crud('invoice-history', 'InvoiceHistoryCrudController');
+    Route::crud('sales-report', 'SalesReportCrudController');
 });

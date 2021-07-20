@@ -51,3 +51,7 @@
 	<a class='nav-link' href='{{ backpack_url('receipt') }}'><i class='nav-icon la la-receipt'></i> {{ __('Receipts') }}</a>
 </li>
 @endif
+
+@if (backpack_user()->can('manage-reports'))
+    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('sales-report') }}'><i class='nav-icon la la-question'></i> SalesReports</a></li>
+@endif
