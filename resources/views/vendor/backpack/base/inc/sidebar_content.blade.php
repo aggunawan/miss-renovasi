@@ -53,5 +53,5 @@
 @endif
 
 @if (backpack_user()->can('manage-reports'))
-    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('sales-report') }}'><i class='nav-icon la la-question'></i> SalesReports</a></li>
+    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('sales-report') }}'><i class='nav-icon la la-folder'></i> SalesReports</a></li>
 @endif

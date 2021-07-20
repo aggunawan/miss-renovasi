@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\ReportType;
 use App\Http\Requests\SalesReportRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -25,6 +26,11 @@ class SalesReportCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column('label');
+        $this->crud->addColumn([
+            'name'  => 'type',
+            'type'  => 'model_function',
+            'function_name' => 'getType',
+        ]);
         CRUD::column('start_date');
         CRUD::column('end_date');
     }
@@ -36,6 +42,17 @@ class SalesReportCrudController extends CrudController
         CRUD::field('label');
         CRUD::field('start_date');
         CRUD::field('end_date');
+
+        $this->crud->addField([
+            'name' => 'type',
+            'type' => 'select2_from_array',
+            'options' => [
+                ReportType::Monthly => 'Monthly',
+                ReportType::Customer => 'Customer',
+            ],
+            'allows_null' => false,
+            'default' => ReportType::Monthly,
+        ]);
     }
 
     protected function setupUpdateOperation()

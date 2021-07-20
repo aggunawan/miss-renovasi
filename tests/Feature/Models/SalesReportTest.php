@@ -21,5 +21,21 @@ class SalesReportTest extends TestCase
         $report->save();
 
         $this->assertEquals($report->type, ReportType::Monthly);
+        $this->assertEquals($report->getType(), 'Monthly Report');
+    }
+
+    public function test_sales_report_with_customer_type()
+    {
+        $report = new SalesReport([
+            'label' => 'Report Label',
+            'start_date' => now()->startOfMonth()->toDateString(),
+            'end_date' => now()->toDateString(),
+            'type' => ReportType::Customer,
+        ]);
+
+        $report->save();
+
+        $this->assertEquals($report->type, ReportType::Customer);
+        $this->assertEquals($report->getType(), 'Customer Report');
     }
 }
