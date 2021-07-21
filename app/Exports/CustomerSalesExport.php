@@ -8,7 +8,7 @@ use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 
-class MonthlySalesExport implements FromView, WithDrawings
+class CustomerSalesExport implements FromView, WithDrawings
 {
     use HasLogo;
 
@@ -21,7 +21,7 @@ class MonthlySalesExport implements FromView, WithDrawings
 
     public function view(): View
     {
-        return view('exports.monthly', [
+        return view('exports.customer', [
             'salesReport' => $this->salesReport
         ]);
     }
