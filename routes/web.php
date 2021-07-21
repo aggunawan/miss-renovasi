@@ -6,10 +6,12 @@ use App\Http\Controllers\PaymentConfirmationController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['admin'])
-    ->get('admin/monthly/{salesReport}', [ExportMonthlyController::class, 'index']);
+    ->get('admin/monthly/{salesReport}', [ExportMonthlyController::class, 'index'])
+    ->name('admin.monthly');
 
 Route::middleware(['admin'])
-    ->get('admin/customer/{salesReport}', [ExportCustomerController::class, 'index']);
+    ->get('admin/customer/{salesReport}', [ExportCustomerController::class, 'index'])
+    ->name('admin.customer');
 
 Route::middleware(['guest'])
 	->patch('payment-confirmation/{payment}', [PaymentConfirmationController::class, 'update'])

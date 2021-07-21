@@ -4,6 +4,7 @@ namespace Tests\Feature\Models;
 
 use App\Enums\ReportType;
 use App\Models\SalesReport;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -37,5 +38,32 @@ class SalesReportTest extends TestCase
 
         $this->assertEquals($report->type, ReportType::Customer);
         $this->assertEquals($report->getType(), 'Customer Report');
+    }
+
+    public function test_get_report_for_monthly_type()
+    {
+        $report = new SalesReport([
+            'label' => 'Report Label',
+            'start_date' => now()->startOfMonth()->toDateString(),
+            'end_date' => now()->toDateString()
+        ]);
+
+        $report->save();
+
+        $this->assertEquals($report->getReport(), route('admin.monthly', $report->id));
+    }
+
+    public function test_get_report_for_customer_type()
+    {
+        $report = new SalesReport([
+            'label' => 'Report Label',
+            'start_date' => now()->startOfMonth()->toDateString(),
+            'end_date' => now()->toDateString(),
+            'type' => ReportType::Customer,
+        ]);
+
+        $report->save();
+
+        $this->assertEquals($report->getReport(), route('admin.customer', $report->id));
     }
 }

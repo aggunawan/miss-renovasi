@@ -31,8 +31,7 @@ class SalesReportCrudController extends CrudController
             'type'  => 'model_function',
             'function_name' => 'getType',
         ]);
-        CRUD::column('start_date');
-        CRUD::column('end_date');
+        $this->crud->addButtonFromView('line', 'excel', 'excel', 'beginning');
     }
 
     protected function setupCreateOperation()
@@ -53,6 +52,20 @@ class SalesReportCrudController extends CrudController
             'allows_null' => false,
             'default' => ReportType::Monthly,
         ]);
+    }
+
+    protected function setupShowOperation()
+    {
+        $this->crud->set('show.setFromDb', false);
+        CRUD::column('label');
+        CRUD::column('start_date');
+        CRUD::column('end_date');
+        $this->crud->addColumn([
+            'name'  => 'type',
+            'type'  => 'model_function',
+            'function_name' => 'getType',
+        ]);
+        $this->crud->addButtonFromView('line', 'excel', 'excel', 'beginning');
     }
 
     protected function setupUpdateOperation()

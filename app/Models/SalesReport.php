@@ -36,4 +36,15 @@ class SalesReport extends Model
                 break;
         }
     }
+
+    public function getReport(): string {
+        switch ($this->type) {
+            case ReportType::Monthly:
+                return route('admin.monthly', $this);
+                break;
+            case ReportType::Customer:
+                return route('admin.customer', $this);
+                break;
+        }
+    }
 }
