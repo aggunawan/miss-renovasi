@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\CustomerRequest;
+use App\Http\Requests\CustomerUpdateRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -31,7 +32,11 @@ class CustomerCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(CustomerRequest::class);
+        $this->fields();
+    }
 
+    protected function fields()
+    {
         CRUD::field('name');
         CRUD::field('email');
         CRUD::field('address');
@@ -40,6 +45,7 @@ class CustomerCrudController extends CrudController
 
     protected function setupUpdateOperation()
     {
-        $this->setupCreateOperation();
+        CRUD::setValidation(CustomerUpdateRequest::class);
+        $this->fields();
     }
 }
