@@ -21,8 +21,18 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="control-label" for="invoice[number]">{{ __('Customer') }}</label>
+                            <input type="text" class="form-control" disabled="true" value="{{ $payment->invoice->customer->name }}">
+                        </div>
+
+                        <div class="form-group">
                             <label class="control-label" for="invoice[number]">{{ __('Nomor Invoice') }}</label>
                             <input type="text" class="form-control" disabled="true" value="{{ $payment->invoice->number }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="invoice[number]">{{ __('Kode Pembayaran') }}</label>
+                            <p class="mb-0 text-primary">{{ $payment->code }}</p>
                         </div>
 
                         @if ($payment->isConfirmable())

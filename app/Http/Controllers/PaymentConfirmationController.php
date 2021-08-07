@@ -12,7 +12,7 @@ class PaymentConfirmationController extends Controller
 {
     public function show(Payment $payment)
     {
-        $payment->load(['invoice']);
+        $payment->load(['invoice.customer']);
 
         return view('payment-confirmations.show', [
             'payment' => $payment
