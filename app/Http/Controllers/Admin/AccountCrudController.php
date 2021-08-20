@@ -120,19 +120,19 @@ class AccountCrudController extends UserCrudController
             }
         );
        
-        $this->crud->addFilter(
-            [
-                'name'  => 'permissions',
-                'type'  => 'select2',
-                'label' => trans('backpack::permissionmanager.extra_permissions'),
-            ],
-            config('permission.models.permission')::all()->pluck('name', 'id')->toArray(),
-            function ($value) {
-                $this->crud->addClause('whereHas', 'permissions', function ($query) use ($value) {
-                    $query->where('permission_id', '=', $value);
-                });
-            }
-        );
+        // $this->crud->addFilter(
+        //     [
+        //         'name'  => 'permissions',
+        //         'type'  => 'select2',
+        //         'label' => trans('backpack::permissionmanager.extra_permissions'),
+        //     ],
+        //     config('permission.models.permission')::all()->pluck('name', 'id')->toArray(),
+        //     function ($value) {
+        //         $this->crud->addClause('whereHas', 'permissions', function ($query) use ($value) {
+        //             $query->where('permission_id', '=', $value);
+        //         });
+        //     }
+        // );
     }
 
     public function update()
