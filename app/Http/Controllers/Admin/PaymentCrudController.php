@@ -33,6 +33,12 @@ class PaymentCrudController extends CrudController
     {
         $this->crud->addColumns([
             [
+                'name' => 'customer.name',
+                'type' => 'model_function',
+                'label' => __('Customer'),
+                'function_name' => 'getCustomerName',
+            ],
+            [
                 'name' => 'invoice',
                 'type' => 'relationship',
                 'entity' => 'invoice',
@@ -53,6 +59,12 @@ class PaymentCrudController extends CrudController
         $this->crud->addColumns([
             [
                 'name' => 'code',
+            ],
+            [
+                'name' => 'customer.name',
+                'type' => 'model_function',
+                'label' => __('Customer'),
+                'function_name' => 'getCustomerName',
             ],
             [
                 'name' => 'invoice.number',

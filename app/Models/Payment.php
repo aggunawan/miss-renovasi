@@ -64,4 +64,9 @@ class Payment extends Model
     {
         return $this->hasOne(PaymentReceipt::class);
     }
+
+    public function getCustomerName()
+    {
+        return $this->invoice->customer->name;
+    }
 }
